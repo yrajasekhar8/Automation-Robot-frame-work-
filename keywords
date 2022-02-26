@@ -1,0 +1,2 @@
+How to fetch the current date time in robotics?
+A) ${request_date_time}=        Get Current Date       result_format=%d-%m-%Y %H:%M:%S
