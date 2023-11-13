@@ -1,2 +1,24 @@
 How to fetch the current date time in robotics?
 A) ${request_date_time}=        Get Current Date       result_format=%d-%m-%Y %H:%M:%S
+
+===========checking two date=====
+
+*** Settings ***
+Library    String
+Library    Collections
+*** Variables ***
+${first_value}    Nov 09, 2023 08:39 PM
+${second_value}    Nov 09, 2023 08:30 PM
+
+*** Test Cases ***
+Compare Date-Time Values
+    Log    ${first_value}
+    Log    ${second_value}
+
+    ${date1} =    Get Regexp Matches    ${first_value}    (\\w+ \\d{2}, \\d{4} \\d{2}:\\d{2} [APMapm]{2})
+    ${date1} =    Get From List    ${date1}    0
+
+    ${date2} =    Get Regexp Matches    ${second_value}    (\\w+ \\d{2}, \\d{4} \\d{2}:\\d{2} [APMapm]{2})
+    ${date2} =    Get From List    ${date2}    0
+
+    Should Be True    '${date1}' >= '${date2}'    Elements are in descending order
